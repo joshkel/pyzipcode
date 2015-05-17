@@ -1,6 +1,5 @@
 
 from pysqlite2 import dbapi2 as sqlite3
-import os
 import csv
 try:
     from settings import db_location
@@ -17,11 +16,11 @@ c.execute("CREATE INDEX city_index ON ZipCodes(city);")
 c.execute("CREATE INDEX state_index ON ZipCodes(state);")
 
 reader = csv.reader(open('zipcode.csv', "rb"))
-reader.next() # prime it
-    
+reader.next()  # prime it
+
 for row in reader:
     zip, city, state, lat, longt, timezone, dst = row
-    
+
     c.execute('INSERT INTO ZipCodes values("%s", "%s", "%s", %s, %s, %s, %s)' % (
         zip,
         city,
@@ -31,7 +30,7 @@ for row in reader:
         timezone,
         dst
     ))
-    
+
 conn.commit()
 
 # We can also close the cursor if we are done with it
