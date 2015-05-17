@@ -25,7 +25,7 @@ class ConnectionManager(object):
             # then just give up...
             try:
                 conn = sqlite3.connect(db_location)
-            except sqlite3.OperationalError, x:
+            except sqlite3.OperationalError as x:
                 retry_count += 1
                 time.sleep(0.001)
 
